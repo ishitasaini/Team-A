@@ -7,25 +7,25 @@ import java.sql.SQLException;
 
 public class AdditionalDetailsDao {
 
-	private static ResultSet res = null;
-	private static AdditionalDetails convertResToObject() throws SQLException{
-		AdditionalDetails ad = null;
-		if(res != null) {
-			while(res.next()) {
-				String username = res.getString(1);
-				int contNumber = res.getInt(2);
-				String postalLocation  = res.getString(3);
-				String postalCity= res.getString(4);
-				String postalState = res.getString(5);
-				String factoryLocation = res.getString(6);
-				String factoryCity = res.getString(7);
-				String factoryState = res.getString(8);
-				String department = res.getString(9);
-				ad = new AdditionalDetails(username, contNumber, postalLocation, postalCity, postalState, factoryLocation, factoryCity, factoryState, department);
-			}
-		}
-		return ad;
-	}
+//	private static ResultSet res = null;
+//	private static AdditionalDetails convertResToObject() throws SQLException{
+//		AdditionalDetails ad = null;
+//		if(res != null) {
+//			while(res.next()) {
+//				String username = res.getString(1);
+//				int contNumber = res.getInt(2);
+//				String postalLocation  = res.getString(3);
+//				String postalCity= res.getString(4);
+//				String postalState = res.getString(5);
+//				String factoryLocation = res.getString(6);
+//				String factoryCity = res.getString(7);
+//				String factoryState = res.getString(8);
+//				String department = res.getString(9);
+//				ad = new AdditionalDetails(username, contNumber, postalLocation, postalCity, postalState, factoryLocation, factoryCity, factoryState, department);
+//			}
+//		}
+//		return ad;
+//	}
 	
 public static boolean insertIntoAdditionalDetails(AdditionalDetails add) throws SQLException {
 		
