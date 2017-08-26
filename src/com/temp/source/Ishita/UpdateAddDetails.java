@@ -26,16 +26,18 @@ public class UpdateAddDetails {
 
 	public Response addDetails(String data, @Context HttpServletRequest request) throws SQLException, JSONException {
 		JSONObject JsonObj = new JSONObject(data);
-		String username = JsonObj.getString("username");
-		int contnumber = JsonObj.getInt("contNumber");
-		String postallocation = JsonObj.getString("postalLocation");
-		String postalcity = JsonObj.getString("postalCity");
-		String postalstate = JsonObj.getString("postalState");
-		String factorylocation = JsonObj.getString("factoryLocation");
-		String factorycity = JsonObj.getString("factoryCity");
-		String factorystate = JsonObj.getString("factoryState");
+		String username = JsonObj.getString("Username");
+		String swift = JsonObj.getString("Swift");
+		int accnumber = JsonObj.getInt("AccNumber");
+		int contnumber = JsonObj.getInt("ContNumber");
+		String postallocation = JsonObj.getString("PostalLocation");
+		String postalcity = JsonObj.getString("PostalCity");
+		String postalstate = JsonObj.getString("PostalState");
+		String factorylocation = JsonObj.getString("FactoryLocation");
+		String factorycity = JsonObj.getString("FactoryCity");
+		String factorystate = JsonObj.getString("FactoryState");
 		String department = JsonObj.getString("Department");
-		AdditionalDetails ad = new AdditionalDetails(username, contnumber, postallocation, factorylocation, postalcity, factorycity, postalstate, factorystate, department);
+		AdditionalDetails ad = new AdditionalDetails(username,swift, accnumber, contnumber, postallocation, factorylocation, postalcity, factorycity, postalstate, factorystate, department);
 		boolean temp;
 		temp = AdditionalDetailsDao.insertIntoAdditionalDetails(ad);
 		if (temp)
@@ -53,8 +55,8 @@ public class UpdateAddDetails {
 	@Path("/updateProducts/")
 	public Response addproducts(String data, @Context HttpServletRequest request) throws SQLException, JSONException {
 		JSONObject JsonObj = new JSONObject(data);
-		String username = JsonObj.getString("username");
-		JSONArray products = JsonObj.getJSONArray("userProducts");
+		String username = JsonObj.getString("Username");
+		JSONArray products = JsonObj.getJSONArray("UserProducts");
 //		System.out.println(products.toString());
 //		ArrayList<String> prod = new ArrayList<String>();
 		String[] prod = new String[products.length()];

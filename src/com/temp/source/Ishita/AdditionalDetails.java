@@ -10,6 +10,8 @@ public class AdditionalDetails {
 	String username;
 	
 	int contNumber;
+	String swift;
+	int accNumber;
 	String postalLocation; 
 	String factoryLocation; 
 	String postalCity; 
@@ -20,10 +22,11 @@ public class AdditionalDetails {
 	
 	
 
-	public AdditionalDetails(String username, int contNumber, String postalLocation, String factoryLocation,
+	public AdditionalDetails(String username, String swift, int accNumber, int contNumber, String postalLocation, String factoryLocation,
 			String postalCity, String factoryCity, String postalState, String factoryState, String department) {
 		super();
-		
+		this.swift = swift;
+		this.accNumber = accNumber;
 		this.contNumber = contNumber;
 		this.postalLocation = postalLocation;
 		this.factoryLocation = factoryLocation;
