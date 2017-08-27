@@ -10,7 +10,7 @@ public static boolean insertIntoProducts(UserProducts up) throws SQLException {
 		int i=0;
 		Connection conn = SQLConnection.getConnection();
 		for (i=0; i<up.userProducts.length; i++)
-		{PreparedStatement st = conn.prepareStatement("INSERT INTO User_products values(?,?)");
+		{PreparedStatement st = conn.prepareStatement("INSERT INTO /'User_products/' values(?,?)");
 		st.setString(1, up.username);
 		st.setString(2, up.userProducts[i]);
 		st.executeUpdate();

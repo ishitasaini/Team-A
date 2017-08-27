@@ -78,7 +78,6 @@
             position:relative;
             height:30px;
         }
-
         #submitLogin {
             width:40%;
             border-radius:20px;
@@ -284,6 +283,7 @@
                                 <div class="collapse" id="CollapsibleUserAccountEdit" ng-controller = "myController" >
                                 <div class="media-body">
                                     <form>
+                                    	
                                          <div class="input-group MyInputDiv">
                                             <span class="input-group-addon MyInputSpan"><b>Account Number</b></span><input type="text" ng-model = "AccNumber" placeholder = "Account Number" class="form-control MyInputField" id="username" name="username"/>
                                         </div>
@@ -336,14 +336,14 @@
 		                                        </div>
 		                                        <br>
 		                                        <div class="input-group MyInputDiv">
-		                                            <span class="input-group-addon MyInputSpan" ><b>City</b></span> <input type="text" ng-model = "FactoryState" placeholder="City" class="form-control MyInputField" list="add2Citylist" id="add2City" name="add2City" style="border-radius: 0px 20px 20px 0px;" />
+		                                            <span class="input-group-addon MyInputSpan" ><b>City</b></span> <input type="text" ng-model = "FactoryCity" placeholder="City" class="form-control MyInputField" list="add2Citylist" id="add2City" name="add2City" style="border-radius: 0px 20px 20px 0px;" />
 		                                            <datalist id="add2Citylist">
 													    <!--Populate <option value = ""> tag-->
 													</datalist>
 		                                        </div>
 		                                        <br>
 		                                        <div class="input-group MyInputDiv">
-		                                            <span class="input-group-addon MyInputSpan" ><b>Locality</b></span> <input type="text" ng-model = "FactoryState" placeholder="Locality" class="form-control MyInputField" list="add2Locallist" id="add2Local" name="add2Local" style="border-radius: 0px 20px 20px 0px;"/>
+		                                            <span class="input-group-addon MyInputSpan" ><b>Locality</b></span> <input type="text" ng-model = "FactoryLocality" placeholder="Locality" class="form-control MyInputField" list="add2Locallist" id="add2Local" name="add2Local" style="border-radius: 0px 20px 20px 0px;"/>
 		                                            <datalist id="add2Locallist">
 													    <!--Populate <option value = ""> tag-->
 													</datalist>
@@ -406,7 +406,7 @@
                     				</ul>
                     			</div>
                     			<div class="col-sm-2" style="background-color: #f7f7f7;color:#337ab7;" >
-                    				<div class="btn-group-vertical" ng-controller="CtrlChecklist" >
+                    				<div class="btn-group-vertical" >
                                     <br>
 									  <button type="button" ng-click = "addAllButton()" class="btn btn-primary">Add All</button>
 									  <button type="button" ng-click = "addButton()" class="btn btn-primary">Submit</button>
@@ -445,8 +445,8 @@
                     		</div>
                             <br>
                             <div class="row">
-                                <div class= "col-sm-offset-3 col-sm-6" id="LoginSubmitDiv" ng-controller = "myController">
-                                    <input id="submitLogin" ng-click="UpdateProducts()" type ="submit" name="SubmitButton" value="Update!" />
+                                <div class= "col-sm-offset-3 col-sm-6" id="LoginSubmitDiv" >
+                                    <input id="submitLogin" ng-click="UpdateProducts()" type ="submit" name="SubmitButton" value="Update!" ng-controller = "myController" />
                                 </div>
                             </div>
                             <br>
@@ -498,7 +498,6 @@
 				}
 			}
 			$scope.subcategoryToggle = function(category, product) {
-
 				var flag = true;
 				if ($scope.categories[category] == true) {
 					
@@ -510,17 +509,14 @@
 							break;
 						}
 					}
-
 					if (flag == true) {
 						console.log("Inside if statement");
 						$scope.categories[category] = false;
 					}
-
 				} else if (($scope.products[category][product] == true) && ($scope.categories[category] == false)) {
 					$scope.categories[category] = true;
 				}
 			}
-
 			$scope.addButton = function() {
 				$scope.arrayCateg=[];
 				for (categ in $scope.categories) {				
@@ -530,13 +526,13 @@
 						for (item in $scope.products[categ]) {
 							if ($scope.products[categ][item] == true) {
 								$scope.arrayCateg[categ].push(item);
+								$scope.arraySub.push(item);
 							}
 						}
 					}
 				}
 				
 			}
-
 			$scope.addAllButton = function() {
 				console.log("Add all button running");
 				$scope.arrayCateg=[];
@@ -547,12 +543,15 @@
 					for (item in $scope.products[categ]) {
                         $scope.products[categ][item] = true;
 						$scope.arrayCateg[categ].push(item);
+						$scope.arraySub.push(item);
 					}
 				}
 				console.log($scope.arrayCateg);
+				console.log($scope.arraySub);
 			}
             $scope.removeAllButton = function(){
                 $scope.arrayCateg=[];
+                $scope.arraySub=[];
                 for (categ in $scope.categories){
                     $scope.categories[categ] = false;
                     for (item in $scope.products[categ]){
@@ -562,13 +561,13 @@
             }
             
 		})
-
 		app.controller('myController',[ '$scope', '$http', function($scope, $http) {
             $scope.UpdateDet = function(){
             	console.log("we are here");
             	var data  = {
-            			AccNumber: $scope.AccNumber,
             			Swift: $scope.Swift,
+            			AccNumber: $scope.AccNumber,
+            			ContNumber: $scope.ContNumber,
             			PostalLocality: $scope.PostalLocality,
             			PostalCity: $scope.PostalCity,
             			PostalState: $scope.PostalState,
@@ -580,11 +579,12 @@
             	}
             	var whatever = $http({
             		url: 'http://localhost:8089/MyRestDemo/rest/update/updateDetails',
-            		method: POST,
-            		headers: {'Content type':'text/plain'},
+            		method: 'POST',
+            		headers: { 'Content-Type': 'text/plain' },
             		data:{
-            			AccNumber: $scope.AccNumber,
             			Swift: $scope.Swift,
+            			AccNumber: $scope.AccNumber,
+            			ContNumber: $scope.ContNumber,
             			PostalLocality: $scope.PostalLocality,
             			PostalCity: $scope.PostalCity,
             			PostalState: $scope.PostalState,
@@ -603,19 +603,23 @@
             	console.log("we are in products");
             	var UserProd = [];
             	for (cat in $scope.arrayCateg){
+            		console.log(arrayCateg[cat]);
             		for (prod in $scope.arrayCateg[cat]){
             			userProd[i]=$scope.arrayCateg[cat][prod];
+            			console.log(arrayCateg[cat][prod]);
             		}
             	}
-            	var data  = {
-            			UserProducts: UserProd
+            	console.log(UserProd);
+            	var data= {
+            			UserProducts: $scope.arraySub
             	
             	}
             	var whatever = $http({
             		url: 'http://localhost:8089/MyRestDemo/rest/update/updateProducts',
-            		method: POST,
-            		headers: {'Content type':'text/plain'},
+            		method: 'POST',
+            		headers: { 'Content-Type': 'text/plain' },
             		data:{
+            			Username: $scope.Username,
             			UserProducts: UserProd
             		}
             	})
@@ -625,8 +629,6 @@
             	
             }
 		}]);
-
-
     </script>>
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>

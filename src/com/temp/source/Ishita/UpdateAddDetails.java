@@ -26,7 +26,7 @@ public class UpdateAddDetails {
 
 	public Response addDetails(String data, @Context HttpServletRequest request) throws SQLException, JSONException {
 		JSONObject JsonObj = new JSONObject(data);
-		String username = JsonObj.getString("Username");
+		//String username = JsonObj.getString("Username");
 		String swift = JsonObj.getString("Swift");
 		int accnumber = JsonObj.getInt("AccNumber");
 		int contnumber = JsonObj.getInt("ContNumber");
@@ -37,6 +37,7 @@ public class UpdateAddDetails {
 		String factorycity = JsonObj.getString("FactoryCity");
 		String factorystate = JsonObj.getString("FactoryState");
 		String department = JsonObj.getString("Department");
+		String username = "neha";
 		AdditionalDetails ad = new AdditionalDetails(username,swift, accnumber, contnumber, postallocation, factorylocation, postalcity, factorycity, postalstate, factorystate, department);
 		boolean temp;
 		temp = AdditionalDetailsDao.insertIntoAdditionalDetails(ad);
@@ -55,8 +56,9 @@ public class UpdateAddDetails {
 	@Path("/updateProducts/")
 	public Response addproducts(String data, @Context HttpServletRequest request) throws SQLException, JSONException {
 		JSONObject JsonObj = new JSONObject(data);
-		String username = JsonObj.getString("Username");
+		//String username = JsonObj.getString("Username");
 		JSONArray products = JsonObj.getJSONArray("UserProducts");
+		String username = "neha";
 //		System.out.println(products.toString());
 //		ArrayList<String> prod = new ArrayList<String>();
 		String[] prod = new String[products.length()];
@@ -65,7 +67,7 @@ public class UpdateAddDetails {
 			prod[j]=(products.get(j).toString());	
 		}
 		System.out.println(prod[1]);
-		System.out.println(username);
+	//	System.out.println(username);
 		return null;
 		
 		

@@ -30,7 +30,7 @@ public class AdditionalDetailsDao {
 public static boolean insertIntoAdditionalDetails(AdditionalDetails add) throws SQLException {
 		
 		Connection conn = SQLConnection.getConnection();
-		PreparedStatement st = conn.prepareStatement("INSERT INTO Customer_Additional_Details values(?,?,?,?,?,?,?,?,?)");
+		PreparedStatement st = conn.prepareStatement("INSERT INTO /'Customer_Additional_Details/' values(?,?,?,?,?,?,?,?,?)");
 		st.setString(1, add.username);
 		st.setInt(2, add.contNumber);
 		st.setString(3, add.postalLocation);
