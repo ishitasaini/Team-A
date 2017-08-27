@@ -28,6 +28,7 @@ public class MyServices {
 		JSONObject inputJsonObj = new JSONObject(data);
 		String username = inputJsonObj.getString("username");
 		String password = inputJsonObj.getString("password");
+		
 		GenericUser gu = GenericUserDaoImpl.searchUser(username);
 		if(gu == null)	{ return Response.serverError().status(Status.EXPECTATION_FAILED).build(); }
 		if(password.equals(gu.getPassword())) {
